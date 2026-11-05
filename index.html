@@ -153,6 +153,16 @@
         </div>
     </div>
 
+    <!-- Image Lightbox Modal (Full Screen Viewer) -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+        <button onclick="closeLightbox()" class="absolute right-4 top-4 text-white/80 hover:text-white bg-black/50 p-2 rounded-full z-50 transition">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+        <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center w-full h-full">
+            <img id="lightbox-img" src="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+        </div>
+    </div>
+
     <!-- JavaScript Logic -->
     <script>
         const defaultItems = [
@@ -248,6 +258,18 @@
             }
         }
 
+        // Lightbox Functions
+        function openLightbox(imgSrc) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            img.src = imgSrc;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
         function renderItems() {
             const grid = document.getElementById('item-grid');
             const emptyState = document.getElementById('empty-state');
@@ -272,19 +294,18 @@
                 const tagsList = item.tags ? item.tags.split(',').map(t => `<span class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">#${t.trim()}</span>`).join(' ') : '';
                 const targetLink = item.fileData || item.url;
 
-                // Facebook-like Image Grid Layout
+                // Facebook-like Image Grid Layout with Click to Lightbox
                 let imageGridHTML = '';
                 if (item.images && item.images.length > 0) {
                     const count = item.images.length;
                     if (count === 1) {
-                        imageGridHTML = `<div class="w-full max-h-[400px] overflow-hidden bg-black/5"><img src="${item.images[0]}" class="w-full h-full object-cover"></div>`;
+                        imageGridHTML = `<div class="w-full max-h-[400px] overflow-hidden bg-black/5 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div>`;
                     } else if (count === 2) {
-                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-64"><div class="overflow-hidden"><img src="${item.images[0]}" class="w-full h-full object-cover"></div><div class="overflow-hidden"><img src="${item.images[1]}" class="w-full h-full object-cover"></div></div>`;
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-64"><div class="overflow-hidden cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div></div>`;
                     } else if (count === 3) {
-                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden row-span-2"><img src="${item.images[0]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[1]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[2]}" class="w-full h-full object-cover"></div></div>`;
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden row-span-2 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[2]}')"><img src="${item.images[2]}" class="w-full h-full object-cover hover:opacity-95 transition"></div></div>`;
                     } else {
-                        // 4 or more
-                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden h-36"><img src="${item.images[0]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[1]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[2]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36 relative"><img src="${item.images[3]}" class="w-full h-full object-cover">${count > 4 ? `<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-lg">+${count - 3}</div>` : ''}</div></div>`;
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[2]}')"><img src="${item.images[2]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 relative cursor-pointer" onclick="openLightbox('${item.images[3]}')"><img src="${item.images[3]}" class="w-full h-full object-cover hover:opacity-95 transition">${count > 4 ? `<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-lg">+${count - 3}</div>` : ''}</div></div>`;
                     }
                 }
 
