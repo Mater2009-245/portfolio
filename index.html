@@ -30,74 +30,73 @@
         body { font-family: 'Sarabun', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-200">
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-950 dark:text-gray-100 min-h-screen transition-colors duration-200">
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-cyan-500/10 text-cyan-500 rounded-lg">
-                    <i class="fa-solid fa-folder-open text-xl"></i>
+                    <i class="fa-solid fa-address-card text-xl"></i>
                 </div>
-                <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-                    My Asset & Portfolio Hub
+                <h1 class="text-lg font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+                    Matee Thongmala
                 </h1>
             </div>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2">
                 <!-- Add Button -->
-                <button onclick="openModal()" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl font-medium shadow-lg shadow-cyan-500/20 transition flex items-center gap-2">
+                <button onclick="openModal()" class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-sm font-medium shadow transition flex items-center gap-1.5">
                     <i class="fa-solid fa-plus"></i>
-                    <span>เพิ่มรายการใหม่</span>
+                    <span>สร้างโพสต์</span>
                 </button>
                 <!-- Theme Toggle -->
-                <button onclick="toggleTheme()" class="p-2.5 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-xl bg-gray-100 dark:bg-gray-800 transition">
-                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                <button onclick="toggleTheme()" class="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-xl bg-gray-100 dark:bg-gray-800 transition">
+                    <i id="theme-icon" class="fa-solid fa-moon text-base"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Layout -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Main Feed Layout -->
+    <main class="max-w-xl mx-auto px-2 sm:px-4 py-6">
+        
         <!-- Filter Tabs & Search -->
-        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-            <div class="flex flex-wrap gap-2 w-full md:w-auto">
-                <button onclick="filterCategory('all')" class="tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-cyan-600 text-white" data-cat="all">ทั้งหมด</button>
-                <button onclick="filterCategory('project')" class="tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700" data-cat="project"><i class="fa-solid fa-code mr-1"></i> เว็บไซต์/ระบบ</button>
-                <button onclick="filterCategory('image')" class="tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700" data-cat="image"><i class="fa-solid fa-image mr-1"></i> ภาพผลงาน</button>
-                <button onclick="filterCategory('file')" class="tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700" data-cat="file"><i class="fa-solid fa-file-pdf mr-1"></i> เอกสาร/ไฟล์</button>
-                <button onclick="filterCategory('note')" class="tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700" data-cat="note"><i class="fa-solid fa-note-sticky mr-1"></i> โน้ต/ข้อมูล</button>
+        <div class="bg-white dark:bg-gray-900 p-3 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 mb-6 space-y-3">
+            <div class="flex flex-wrap gap-1.5">
+                <button onclick="filterCategory('all')" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-cyan-600 text-white" data-cat="all">ทั้งหมด</button>
+                <button onclick="filterCategory('project')" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400" data-cat="project"><i class="fa-solid fa-code mr-1"></i> เว็บไซต์</button>
+                <button onclick="filterCategory('image')" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400" data-cat="image"><i class="fa-solid fa-image mr-1"></i> รูปภาพ</button>
+                <button onclick="filterCategory('file')" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400" data-cat="file"><i class="fa-solid fa-file-pdf mr-1"></i> เอกสาร</button>
+                <button onclick="filterCategory('note')" class="tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400" data-cat="note"><i class="fa-solid fa-note-sticky mr-1"></i> โน้ต</button>
             </div>
-
-            <!-- Search Bar -->
-            <div class="relative w-full md:w-64">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" id="search-input" oninput="renderItems()" placeholder="ค้นหาชื่อหรือแท็ก..." 
-                    class="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input type="text" id="search-input" oninput="renderItems()" placeholder="ค้นหาโพสต์ หรือแท็ก..." 
+                    class="w-full pl-9 pr-4 py-1.5 rounded-xl text-sm border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-500">
             </div>
         </div>
 
-        <!-- Grid Cards Container -->
-        <div id="item-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamic Content Output Here -->
+        <!-- Feed Posts Container -->
+        <div id="item-grid" class="space-y-6">
+            <!-- Dynamic Social Feed Cards Here -->
         </div>
 
         <!-- Empty State -->
-        <div id="empty-state" class="hidden text-center py-16">
-            <i class="fa-solid fa-folder-open text-5xl text-gray-400 mb-4"></i>
-            <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400">ยังไม่มีข้อมูลในหมวดนี้</h3>
-            <p class="text-sm text-gray-400 mt-1">คลิกปุ่ม "เพิ่มรายการใหม่" เพื่อเริ่มเก็บข้อมูลผลงานของคุณได้เลย</p>
+        <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6">
+            <i class="fa-solid fa-newspaper text-4xl text-gray-400 mb-3"></i>
+            <h3 class="text-base font-semibold text-gray-600 dark:text-gray-400">ยังไม่มีโพสต์ในหมวดนี้</h3>
+            <p class="text-xs text-gray-400 mt-1">คลิกปุ่ม "สร้างโพสต์" เพื่อแชร์ผลงานของคุณได้เลย</p>
         </div>
     </main>
 
-    <!-- Modal Form (Add / Edit) -->
+    <!-- Modal Form (Add / Edit Post) -->
     <div id="modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-2xl relative border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-md p-6 shadow-2xl relative border border-gray-200 dark:border-gray-800 max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal()" class="absolute right-4 top-4 text-gray-400 hover:text-gray-600 dark:hover:text-white">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            <h2 id="modal-title" class="text-xl font-bold mb-4">เพิ่มรายการใหม่</h2>
+            <h2 id="modal-title" class="text-lg font-bold mb-4">สร้างโพสต์ใหม่</h2>
 
             <form id="asset-form" onsubmit="saveItem(event)" class="space-y-4">
                 <input type="hidden" id="item-id">
@@ -105,50 +104,50 @@
                 <input type="hidden" id="item-file-name">
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">หมวดหมู่</label>
-                    <select id="item-category" required class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-cyan-500 outline-none">
+                    <label class="block text-xs font-medium mb-1 text-gray-500">หมวดหมู่</label>
+                    <select id="item-category" required class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-cyan-500 outline-none">
+                        <option value="image">รูปภาพ / ฟีดโซเชียล (เลือกได้หลายรูป)</option>
                         <option value="project">เว็บไซต์ / ระบบ (Project)</option>
-                        <option value="image">รูปภาพ / ดีไซน์ (เลือกได้หลายรูป)</option>
-                        <option value="file">ไฟล์ / เอกสาร (PDF, DOC, DOCX)</option>
-                        <option value="note">บันทึก / ข้อมูลทั่วไป (Note)</option>
+                        <option value="file">ไฟล์ / เอกสาร (PDF, DOC)</option>
+                        <option value="note">บันทึก / ข้อความ (Note)</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">ชื่อหัวข้อ / โปรเจกต์</label>
-                    <input type="text" id="item-title" required class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="เช่น ผลงานออกแบบ หรือ Portfolio">
+                    <label class="block text-xs font-medium mb-1 text-gray-500">หัวข้อโพสต์</label>
+                    <input type="text" id="item-title" required class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="เช่น iPhone 18 Pro Max มาแล้ว!">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">รายละเอียด</label>
-                    <textarea id="item-desc" rows="3" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="รายละเอียดหรือโน้ตสั้นๆ..."></textarea>
+                    <label class="block text-xs font-medium mb-1 text-gray-500">แคปชัน / ข้อความสเตตัส</label>
+                    <textarea id="item-desc" rows="3" class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="เขียนข้อความประกอบโพสต์ของคุณ..."></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">อัปโหลดรูปภาพ (เลือกได้หลายรูปพร้อมกัน)</label>
-                    <input type="file" id="item-images-input" onchange="handleMultipleImages(event)" accept="image/*" multiple class="w-full px-3 py-2 text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/10 file:text-cyan-600 dark:file:text-cyan-400 hover:file:bg-cyan-500/20 border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer bg-white dark:bg-gray-900">
+                    <label class="block text-xs font-medium mb-1 text-gray-500">อัปโหลดรูปภาพ (เลือกหลายรูปได้)</label>
+                    <input type="file" id="item-images-input" onchange="handleMultipleImages(event)" accept="image/*" multiple class="w-full px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyan-500/10 file:text-cyan-600 dark:file:text-cyan-400 hover:file:bg-cyan-500/20 border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer bg-white dark:bg-gray-800">
                     <p id="image-status" class="text-xs text-cyan-500 mt-1 font-medium"></p>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">อัปโหลดไฟล์เอกสาร (PDF, DOCX)</label>
-                    <input type="file" id="item-file-input" onchange="handleFileUpload(event)" accept=".pdf, .doc, .docx" class="w-full px-3 py-2 text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/10 file:text-cyan-600 dark:file:text-cyan-400 hover:file:bg-cyan-500/20 border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer bg-white dark:bg-gray-900">
+                    <label class="block text-xs font-medium mb-1 text-gray-500">แนบไฟล์เอกสาร (ถ้ามี)</label>
+                    <input type="file" id="item-file-input" onchange="handleFileUpload(event)" accept=".pdf, .doc, .docx" class="w-full px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-cyan-500/10 file:text-cyan-600 dark:file:text-cyan-400 hover:file:bg-cyan-500/20 border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer bg-white dark:bg-gray-800">
                     <p id="file-status" class="text-xs text-cyan-500 mt-1 font-medium"></p>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">หรือใส่ ลิงก์ / URL (Google Drive, GitHub, Web)</label>
-                    <input type="url" id="item-url" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="https://drive.google.com/...">
+                    <label class="block text-xs font-medium mb-1 text-gray-500">หรือลิงก์ภายนอก (URL)</label>
+                    <input type="url" id="item-url" class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="https://...">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">แท็ก (คั่นด้วยเครื่องหมายจุลภาค ,)</label>
-                    <input type="text" id="item-tags" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="ดีไซน์, โปสเตอร์, งานออกแบบ">
+                    <label class="block text-xs font-medium mb-1 text-gray-500">แท็ก (คั่นด้วยจุลภาค ,)</label>
+                    <input type="text" id="item-tags" class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-cyan-500 outline-none" placeholder="รีวิว, มือถือ, ไอโฟน">
                 </div>
 
-                <div class="flex justify-end gap-3 pt-4">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">ยกเลิก</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-medium">บันทึกข้อมูล</button>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal()" class="px-3 py-1.5 text-sm rounded-xl border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-1.5 text-sm rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-medium">โพสต์ข้อมูล</button>
                 </div>
             </form>
         </div>
@@ -160,14 +159,14 @@
             {
                 id: '1',
                 category: 'image',
-                title: 'ผลงานภาพถ่ายกิจกรรม',
-                desc: 'รวมภาพถ่ายกิจกรรมและผลงานการออกแบบที่ผ่านมา',
+                title: 'iPhone 18 Pro Max มาเติมความพรีเมียมให้ทุกวันของคุณ',
+                desc: '📱 ✨ ตัวท็อปที่ใคร ๆ ก็อยากครอบครอง! สัมผัสความหรูหราและเทคโนโลยีล้ำสมัยที่ดีที่สุด',
                 url: '',
                 images: [],
                 fileData: '',
                 fileName: '',
-                tags: 'รูปภาพ, กิจกรรม',
-                date: '2026-11-04'
+                tags: 'รีวิว, มือถือ',
+                date: '28 ต.ค. 2026'
             }
         ];
 
@@ -186,9 +185,9 @@
             currentImages = [];
             let loadedCount = 0;
 
-            files.forEach((file, index) => {
+            files.forEach((file) => {
                 if (file.size > 4 * 1024 * 1024) {
-                    alert(`ไฟล์ ${file.name} มีขนาดใหญ่เกิน 4MB ข้ามการอัปโหลดไฟล์นี้`);
+                    alert(`ไฟล์ ${file.name} มีขนาดใหญ่เกิน 4MB`);
                     return;
                 }
                 const reader = new FileReader();
@@ -204,18 +203,11 @@
         function handleFileUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
-
-            if (file.size > 4 * 1024 * 1024) {
-                alert('ไฟล์มีขนาดใหญ่เกิน 4MB กรุณาเลือกไฟล์ที่มีขนาดเล็กลง');
-                e.target.value = '';
-                return;
-            }
-
             const reader = new FileReader();
             reader.onload = function(evt) {
                 document.getElementById('item-file-data').value = evt.target.result;
                 document.getElementById('item-file-name').value = file.name;
-                document.getElementById('file-status').innerText = `✓ แนบไฟล์แล้ว: ${file.name}`;
+                document.getElementById('file-status').innerText = `✓ แนบไฟล์: ${file.name}`;
             };
             reader.readAsDataURL(file);
         }
@@ -225,10 +217,10 @@
             const icon = document.getElementById('theme-icon');
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
-                icon.className = 'fa-solid fa-sun text-lg text-amber-500';
+                icon.className = 'fa-solid fa-sun text-amber-500';
             } else {
                 html.classList.add('dark');
-                icon.className = 'fa-solid fa-moon text-lg text-cyan-400';
+                icon.className = 'fa-solid fa-moon text-cyan-400';
             }
         }
 
@@ -236,19 +228,16 @@
             currentCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 if (btn.dataset.cat === cat) {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-cyan-600 text-white';
+                    btn.className = 'tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-cyan-600 text-white';
                 } else {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700';
+                    btn.className = 'tab-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400';
                 }
             });
             renderItems();
         }
 
         function openFile(targetLink, fileName) {
-            if (!targetLink) {
-                alert('ยังไม่ได้ใส่ลิงก์หรือแนบไฟล์ในรายการนี้');
-                return;
-            }
+            if (!targetLink) return;
             if (fileName && targetLink.startsWith('data:')) {
                 const a = document.createElement('a');
                 a.href = targetLink;
@@ -280,70 +269,65 @@
 
             emptyState.classList.add('hidden');
             grid.innerHTML = filtered.map(item => {
-                const badgeInfo = getCategoryBadge(item.category);
-                const tagsList = item.tags ? item.tags.split(',').map(t => `<span class="text-xs px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">#${t.trim()}</span>`).join(' ') : '';
+                const tagsList = item.tags ? item.tags.split(',').map(t => `<span class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">#${t.trim()}</span>`).join(' ') : '';
                 const targetLink = item.fileData || item.url;
 
-                // Render image slider / grid if multiple images exist
-                let imageHTML = '';
+                // Facebook-like Image Grid Layout
+                let imageGridHTML = '';
                 if (item.images && item.images.length > 0) {
-                    imageHTML = `
-                        <div class="grid grid-cols-${Math.min(item.images.length, 3)} gap-1 bg-gray-100 dark:bg-gray-900 p-1">
-                            ${item.images.map(img => `<div class="h-32 overflow-hidden rounded-lg"><img src="${img}" class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>`).join('')}
-                        </div>
-                    `;
-                } else {
-                    imageHTML = `
-                        <div class="h-24 w-full bg-cyan-500/5 dark:bg-cyan-500/10 flex items-center justify-center">
-                            <i class="${badgeInfo.icon} text-4xl text-cyan-500/60"></i>
-                        </div>
-                    `;
+                    const count = item.images.length;
+                    if (count === 1) {
+                        imageGridHTML = `<div class="w-full max-h-[400px] overflow-hidden bg-black/5"><img src="${item.images[0]}" class="w-full h-full object-cover"></div>`;
+                    } else if (count === 2) {
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-64"><div class="overflow-hidden"><img src="${item.images[0]}" class="w-full h-full object-cover"></div><div class="overflow-hidden"><img src="${item.images[1]}" class="w-full h-full object-cover"></div></div>`;
+                    } else if (count === 3) {
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden row-span-2"><img src="${item.images[0]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[1]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[2]}" class="w-full h-full object-cover"></div></div>`;
+                    } else {
+                        // 4 or more
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden h-36"><img src="${item.images[0]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[1]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36"><img src="${item.images[2]}" class="w-full h-full object-cover"></div><div class="overflow-hidden h-36 relative"><img src="${item.images[3]}" class="w-full h-full object-cover">${count > 4 ? `<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-lg">+${count - 3}</div>` : ''}</div></div>`;
+                    }
                 }
 
                 return `
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/60 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col justify-between group">
-                        <div>
-                            ${imageHTML}
-                            <div class="p-5">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${badgeInfo.bg} ${badgeInfo.color}">
-                                        <i class="${badgeInfo.icon} mr-1"></i> ${badgeInfo.label}
-                                    </span>
-                                    <span class="text-xs text-gray-400">${item.date}</span>
+                    <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
+                        <!-- Profile Header -->
+                        <div class="p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-cyan-500/10 text-cyan-500 flex items-center justify-center font-bold">
+                                    MT
                                 </div>
-                                <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white line-clamp-1">${item.title}</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">${item.desc || 'ไม่มีรายละเอียด'}</p>
-                                <div class="flex flex-wrap gap-1 mb-2">${tagsList}</div>
+                                <div>
+                                    <h3 class="font-bold text-sm text-gray-900 dark:text-white">Matee Thongmala</h3>
+                                    <p class="text-xs text-gray-400 flex items-center gap-1">${item.date} • <i class="fa-solid fa-globe text-[10px]"></i></p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button onclick="editItem('${item.id}')" class="p-2 text-gray-400 hover:text-cyan-500 text-sm" title="แก้ไข"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button onclick="deleteItem('${item.id}')" class="p-2 text-gray-400 hover:text-rose-500 text-sm" title="ลบ"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
 
-                        <div class="px-5 py-3 border-t border-gray-100 dark:border-gray-700/60 bg-gray-50/50 dark:bg-gray-800/50 flex items-center justify-between">
-                            ${targetLink ? `
+                        <!-- Post Caption & Title -->
+                        <div class="px-4 pb-3">
+                            <h4 class="font-bold text-base mb-1 text-gray-900 dark:text-white">${item.title}</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 whitespace-pre-line mb-2">${item.desc || ''}</p>
+                            <div class="mb-1">${tagsList}</div>
+                        </div>
+
+                        <!-- Images Feed Grid -->
+                        ${imageGridHTML}
+
+                        <!-- Action / Attachment Footer -->
+                        ${targetLink ? `
+                            <div class="px-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
                                 <button onclick="openFile('${targetLink}', '${item.fileName || ''}')" class="text-xs text-cyan-600 dark:text-cyan-400 hover:underline font-medium flex items-center gap-1">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดไฟล์แนบ
-                                </button>
-                            ` : '<span class="text-xs text-gray-400">ไม่มีไฟล์เอกสาร</span>'}
-                            <div class="flex items-center gap-2">
-                                <button onclick="editItem('${item.id}')" class="text-gray-400 hover:text-cyan-500 transition p-1" title="แก้ไข">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                                <button onclick="deleteItem('${item.id}')" class="text-gray-400 hover:text-rose-500 transition p-1" title="ลบ">
-                                    <i class="fa-solid fa-trash"></i>
+                                    <i class="fa-solid fa-paperclip"></i> เปิดไฟล์แนบ / ลิงก์ภายนอก
                                 </button>
                             </div>
-                        </div>
+                        ` : ''}
                     </div>
                 `;
             }).join('');
-        }
-
-        function getCategoryBadge(cat) {
-            switch(cat) {
-                case 'project': return { label: 'Project', bg: 'bg-blue-500/10', color: 'text-blue-500', icon: 'fa-solid fa-code' };
-                case 'image': return { label: 'Image Gallery', bg: 'bg-emerald-500/10', color: 'text-emerald-500', icon: 'fa-solid fa-image' };
-                case 'file': return { label: 'Document', bg: 'bg-purple-500/10', color: 'text-purple-500', icon: 'fa-solid fa-file-pdf' };
-                default: return { label: 'Note', bg: 'bg-amber-500/10', color: 'text-amber-500', icon: 'fa-solid fa-note-sticky' };
-            }
         }
 
         function openModal() {
@@ -354,7 +338,7 @@
             document.getElementById('image-status').innerText = '';
             document.getElementById('file-status').innerText = '';
             currentImages = [];
-            document.getElementById('modal-title').innerText = 'เพิ่มรายการใหม่';
+            document.getElementById('modal-title').innerText = 'สร้างโพสต์ใหม่';
             document.getElementById('modal').classList.remove('hidden');
         }
 
@@ -372,14 +356,14 @@
             const fileData = document.getElementById('item-file-data').value;
             const fileName = document.getElementById('item-file-name').value;
             const tags = document.getElementById('item-tags').value;
-            const date = new Date().toISOString().split('T')[0];
+            const date = 'วันนี้';
 
             if (id) {
                 const index = items.findIndex(item => item.id === id);
                 if (index !== -1) {
                     items[index] = { 
                         ...items[index], 
-                        category, title, desc, url, tags, date,
+                        category, title, desc, url, tags,
                         images: currentImages.length > 0 ? currentImages : items[index].images,
                         fileData: fileData || items[index].fileData,
                         fileName: fileName || items[index].fileName
@@ -396,7 +380,7 @@
             try {
                 localStorage.setItem('my_assets', JSON.stringify(items));
             } catch (err) {
-                alert('ไฟล์หรือรูปภาพมีขนาดใหญ่เกินความจุ LocalStorage กรุณาลดขนาดรูปลง');
+                alert('ขนาดไฟล์ใหญ่เกินความจุ LocalStorage กรุณาลดขนาดรูปลง');
                 return;
             }
 
@@ -415,17 +399,16 @@
             document.getElementById('item-url').value = item.url || '';
             document.getElementById('item-file-data').value = item.fileData || '';
             document.getElementById('item-file-name').value = item.fileName || '';
-            document.getElementById('file-status').innerText = item.fileName ? `ไฟล์ปัจจุบัน: ${item.fileName}` : '';
             currentImages = item.images || [];
             document.getElementById('image-status').innerText = currentImages.length > 0 ? `รูปภาพเดิม: ${currentImages.length} รูป` : '';
             document.getElementById('item-tags').value = item.tags || '';
-            document.getElementById('modal-title').innerText = 'แก้ไขรายการ';
+            document.getElementById('modal-title').innerText = 'แก้ไขโพสต์';
 
             document.getElementById('modal').classList.remove('hidden');
         }
 
         function deleteItem(id) {
-            if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบรายการนี้?')) {
+            if (confirm('คุณต้องการลบโพสต์นี้ใช่หรือไม่?')) {
                 items = items.filter(i => i.id !== id);
                 localStorage.setItem('my_assets', JSON.stringify(items));
                 renderItems();
