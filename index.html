@@ -3,575 +3,160 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Matee Thongmala - Personal Portfolio & Asset Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Matee Thongmala – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#050b18; --glow1:rgba(6,182,212,.30); --glow2:rgba(99,102,241,.22); --glow3:rgba(20,184,166,.18);
-  --dot:rgba(148,197,230,.16); --card:rgba(15,27,46,.72); --line:rgba(120,170,210,.18);
-  --text:#e8f1fa; --muted:#8aa3bd; --accent:#22b8d6; --bar:rgba(15,27,46,.9);
-  color-scheme:dark;
-}
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --bg:#f2f7fb; --glow1:rgba(6,182,212,.22); --glow2:rgba(99,102,241,.14); --glow3:rgba(20,184,166,.14);
-    --dot:rgba(30,80,120,.14); --card:rgba(255,255,255,.8); --line:rgba(30,80,120,.14);
-    --text:#0f2236; --muted:#587089; --accent:#0891b2; --bar:rgba(255,255,255,.9); color-scheme:light;
-  }
-}
-:root[data-theme="light"]{
-  --bg:#f2f7fb; --glow1:rgba(6,182,212,.22); --glow2:rgba(99,102,241,.14); --glow3:rgba(20,184,166,.14);
-  --dot:rgba(30,80,120,.14); --card:rgba(255,255,255,.8); --line:rgba(30,80,120,.14);
-  --text:#0f2236; --muted:#587089; --accent:#0891b2; --bar:rgba(255,255,255,.9); color-scheme:light;
-}
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{--bg:#050b18;--o1:rgba(6,182,212,.35);--o2:rgba(99,102,241,.3);--o3:rgba(20,184,166,.25);--grid:rgba(120,200,230,.2);--vig:rgba(2,6,14,.55);--spark:rgba(190,235,250,.85);--g1:rgba(6,182,212,.22);--g2:rgba(99,102,241,.16);--card:rgba(15,27,46,.7);--line:rgba(120,170,210,.2);--text:#eef5fb;--muted:#9ab1c7;--accent:#22b8d6;--on:#04202a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root{--bg:#f4f8fb;--o1:rgba(6,182,212,.22);--o2:rgba(99,102,241,.16);--o3:rgba(20,184,166,.16);--grid:rgba(30,80,120,.12);--vig:rgba(190,210,228,.55);--spark:rgba(10,100,130,.5);--g1:rgba(6,182,212,.14);--g2:rgba(99,102,241,.08);--card:#fff;--line:rgba(30,80,120,.16);--text:#0f2236;--muted:#4f677f;--accent:#0a7f96;--on:#fff;--cm:68%;color-scheme:light}}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;min-height:100vh;font-family:"Noto Sans Thai",system-ui,sans-serif;color:var(--text);background:var(--bg);position:relative}
-
-/* ===== พื้นหลังหลัก ===== */
-body::before{
-  content:"";position:fixed;inset:0;z-index:-2;
-  background:
-    radial-gradient(circle 320px at calc(50% + var(--mx,0) * 50%) calc(50% + var(--my,0) * 50%), var(--glow1), transparent 70%),
-    radial-gradient(ellipse 60% 45% at calc(15% + var(--mx,0) * 14%) calc(0% + var(--my,0) * 12%), var(--glow1), transparent 70%),
-    radial-gradient(ellipse 50% 40% at calc(90% - var(--mx,0) * 12%) calc(15% - var(--my,0) * 12%), var(--glow2), transparent 70%),
-    radial-gradient(ellipse 70% 40% at calc(50% + var(--mx,0) * 18%) calc(105% - var(--my,0) * 10%), var(--glow3), transparent 70%),
-    var(--bg);
+body{margin:0;font-family:"Noto Sans Thai",system-ui,sans-serif;font-size:16px;line-height:1.75;color:var(--text);background:var(--bg)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 18px}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg>*{position:absolute}
+.orb{border-radius:50%;filter:blur(60px);transform:translate3d(calc(var(--mx,0)*var(--d)*1.5px),calc(var(--my,0)*var(--d)*1.5px),0)}
+.o1{width:520px;height:520px;left:-140px;top:-120px;background:var(--o1)}
+.o2{width:440px;height:440px;right:-120px;top:8%;background:var(--o2)}
+.o3{width:380px;height:380px;left:30%;bottom:-160px;background:var(--o3)}
+.o4{width:130px;height:130px;right:16%;top:54%;background:var(--o1);filter:blur(22px);opacity:.75}
+.floor{left:-50%;right:-50%;bottom:0;height:55vh;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px;transform-origin:50% 100%;transform:translateX(calc(var(--mx,0)*-12px)) perspective(500px) rotateX(62deg);-webkit-mask-image:linear-gradient(to top,#000 0%,transparent 85%);mask-image:linear-gradient(to top,#000 0%,transparent 85%)}
+.vig{inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 50%,var(--vig) 100%)}
+.dot{border-radius:50%;background:var(--spark);transform:translate3d(calc(var(--mx,0)*var(--d)*1.5px),calc(var(--my,0)*var(--d)*1.5px),0)}
+.shape{border:1.5px solid color-mix(in srgb,var(--accent) 50%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%);box-shadow:inset 0 0 24px color-mix(in srgb,var(--accent) 12%,transparent);transform:translate3d(calc(var(--mx,0)*var(--d)*1.5px),calc(var(--my,0)*var(--d)*1.5px),0) rotate(var(--r,0deg));animation:flt var(--t,9s) ease-in-out infinite}
+.ring{border-radius:50%}
+.beam{width:200px;height:90vh;top:-10vh;background:linear-gradient(180deg,var(--o1),transparent 75%);filter:blur(28px);opacity:.55;transform:translate3d(calc(var(--mx,0)*var(--d)*1.5px),0,0) rotate(var(--r))}
+.glow{left:5%;right:5%;bottom:-12vh;height:42vh;background:radial-gradient(ellipse at 50% 100%,var(--o1),transparent 70%)}
+@keyframes flt{50%{translate:0 -16px}}
+@media (prefers-reduced-motion:reduce){.shape{animation:none}}
+header.hero{padding:48px 0 28px;display:grid;grid-template-columns:1fr;gap:20px;justify-items:center;text-align:center}
+.stage{position:relative}
+.stage::after{display:none}
+.photo{width:168px;height:168px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#6366f1) center/cover no-repeat;display:grid;place-items:center;color:#fff;font-size:44px;font-weight:700;border:3px solid var(--line);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 14%,transparent),0 0 60px color-mix(in srgb,var(--accent) 35%,transparent);animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -14px}}
+@keyframes sh{50%{transform:scale(.75);opacity:.6}}
+@media (prefers-reduced-motion:reduce){.photo,.stage::after{animation:none}}
+.en{margin:0 0 8px;color:var(--muted);font-size:17px;letter-spacing:.02em}
+@media (max-width:560px){.photo{width:140px;height:140px}}
+h1{font-size:clamp(32px,7vw,46px);line-height:1.2;margin:0 0 6px}
+.role{margin:0 0 14px;color:var(--accent);font-weight:600;font-size:18px}
+.hero p{margin:0 auto;color:var(--muted);max-width:60ch}
+h2{font-size:20px;margin:40px 0 14px}
+.about{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.about div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:2px}
+.about b{min-width:96px;color:var(--accent)}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filter button{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:14px;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.filter svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:var(--muted);transition:color .25s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.filter button:hover{color:var(--text);border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent)}
+.filter button:hover svg,.filter button[aria-pressed="true"] svg{color:color-mix(in srgb,var(--c) var(--cm,100%),var(--text));transform:scale(1.18) rotate(-6deg)}
+.filter button[aria-pressed="true"]{background:color-mix(in srgb,var(--c) 22%,transparent);border-color:var(--c);color:var(--text);font-weight:600}
+.list{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.work{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;backdrop-filter:blur(8px);box-shadow:0 18px 36px -22px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06)}
+.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 85%,#000),color-mix(in srgb,var(--c) 40%,#6366f1));display:grid;place-items:center;color:#fff;font-size:13px;opacity:.9}
+.body{padding:16px 20px 18px}
+.meta{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);margin-bottom:4px}
+.ti{width:17px;height:17px;flex:none;fill:none;stroke:color-mix(in srgb,var(--c) var(--cm,100%),var(--text));stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.work h3{margin:0 0 4px;font-size:18px}
+.work{transition:transform .3s cubic-bezier(.34,1.3,.5,1),border-color .3s,box-shadow .3s}
+.work:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 55%,transparent);box-shadow:0 22px 40px -22px color-mix(in srgb,var(--c) 65%,transparent),inset 0 1px 0 rgba(255,255,255,.06)}
+.work p{margin:0;color:var(--muted)}
+.work a{display:inline-block;margin-top:10px;color:color-mix(in srgb,var(--c) var(--cm,100%),var(--text));font-weight:600;text-decoration:none}
+.work a:hover{text-decoration:underline}
+.empty{color:var(--muted);padding:20px 0}
+footer{margin:48px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.print{font:inherit;font-size:14px;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:var(--muted);cursor:pointer}
+@media print{
+  body{background:#fff;color:#000;font-size:12pt}
+  :root{--card:#fff;--line:#bbb;--muted:#333;--accent:#055;--text:#000}
+  .filter,.print,.bg{display:none}
+  .work{break-inside:avoid}
 }
-body::after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:radial-gradient(var(--dot) 1px, transparent 1px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 85%);
-          mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 85%);
-}
-
-/* ===== ไอคอนลอยตามเมาส์ ===== */
-.fx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.ic{position:absolute;color:var(--accent);will-change:transform}
-.ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block}
-.ic[data-far="1"]{opacity:.28;filter:blur(1px)}
-.ic[data-far="0"]{opacity:.55}
-
-/* ===== แถบเครื่องมือด้านบน ===== */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;background:var(--bar);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
-.bar b{font-size:16px;color:var(--text);display:flex;align-items:center;gap:8px}
-.pick{display:flex;gap:8px;align-items:center}
-.theme,.btn-add{font:inherit;font-size:13px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;transition:all .2s}
-.btn-add{background:var(--accent);border-color:var(--accent);color:#04202a;font-weight:600;display:flex;align-items:center;gap:6px}
-.btn-add:hover{opacity:.9}
-
-/* ===== แถบแท็บแบบยุบรวมและกางออกเมื่อชี้เมาส์ (Hover Expand) ===== */
-.tabs-container{display:flex;justify-content:center;margin-bottom:16px}
-.tabs{
-  position:relative;display:flex;gap:4px;padding:6px;
-  background:color-mix(in srgb,var(--card) 80%,transparent);
-  border:1px solid var(--line);border-radius:16px;
-  max-width:140px; overflow:hidden;
-  transition:max-width .4s cubic-bezier(.34,1.45,.5,1), box-shadow .3s;
-  box-shadow:0 4px 16px rgba(0,0,0,.15);
-  cursor:pointer;
-}
-.tabs:hover, .tabs:focus-within{
-  max-width:550px;
-}
-.tabs .pill{
-  position:absolute;top:6px;left:6px;width:0;height:calc(100% - 12px);
-  border-radius:999px;background:var(--accent);
-  box-shadow:0 0 18px color-mix(in srgb,var(--accent) 55%,transparent);
-  transition:transform .38s cubic-bezier(.34,1.45,.5,1),width .38s cubic-bezier(.34,1.45,.5,1);
-  pointer-events:none;
-}
-.tabs button{
-  position:relative;font:inherit;font-size:13px;color:var(--muted);background:none;border:0;
-  padding:8px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .25s;
-  opacity:0; transform:scale(0.9); pointer-events:none;
-  transition:opacity .3s ease, transform .3s ease, color .25s;
-}
-/* เมื่อเอาเมาส์ชี้ ให้ปุ่มทั้งหมดค่อยๆ ปรากฏและขยายออกมา */
-.tabs:hover button, .tabs:focus-within button, .tabs button.always-show {
-  opacity:1; transform:scale(1); pointer-events:auto;
-}
-/* ปุ่มแรก ("ทั้งหมด") จะแสดงให้เห็นเป็นหลักตอนพับเก็บ */
-.tabs button:first-of-type {
-  opacity:1; transform:scale(1); pointer-events:auto;
-}
-.tabs button.on{color:#04202a;font-weight:600}
-
-/* ===== Layout หลัก และ การ์ดโพสต์ ===== */
-main{max-width:1100px;margin:24px auto 60px;padding:0 16px;display:grid;gap:20px}
-.search-box{width:100%;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 40%,transparent);color:var(--text);font:inherit;font-size:14px;outline:none}
-.search-box:focus{border-color:var(--accent)}
-
-.feed-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
-@media (min-width:768px){.feed-grid{grid-template-columns:1fr 1fr}}
-
-.card{background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--line);border-radius:18px;padding:0;overflow:hidden;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,.15)}
-.card-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px 12px}
-.who{display:flex;gap:12px;align-items:center}
-.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(34,184,214,.18);color:var(--accent);font-weight:700;font-size:14px}
-.who b{display:block;font-size:15px}
-.who small{display:block;color:var(--muted);font-size:12px}
-.actions{display:flex;gap:8px}
-.actions button{background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;font-size:14px;transition:color .2s}
-.actions button:hover{color:var(--accent)}
-
-.card-body{padding:0 20px 16px}
-.card h3{margin:0 0 6px;font-size:17px;color:var(--text)}
-.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6;white-space:pre-line}
-.tag-list{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
-.tag{color:var(--accent);font-size:13px}
-
-/* รูปภาพในโพสต์แบบ Social Grid (ขนาดใหญ่เต็มตา) */
-.img-grid{margin-top:12px;background:rgba(0,0,0,.2);display:grid;gap:4px;overflow:hidden;border-radius:14px}
-.img-grid.c1{grid-template-columns:1fr;max-height:500px}
-.img-grid.c2{grid-template-columns:1fr 1fr;height:400px}
-.img-grid.c3{grid-template-columns:1fr 1fr;height:440px}
-.img-grid.c3 .img-box:first-child{grid-row:span 2}
-.img-grid.c4{grid-template-columns:1fr 1fr;height:440px}
-.img-box{position:relative;overflow:hidden;cursor:pointer;height:100%}
-.img-box img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.img-box:hover img{transform:scale(1.03)}
-.more-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700}
-
-.card-footer{padding:12px 20px;border-top:1px solid var(--line);background:rgba(0,0,0,.1);font-size:13px}
-.card-footer a{color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.card-footer a:hover{text-decoration:underline}
-
-/* Modal ป๊อปอัป */
-.modal-bg{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px}
-.modal-bg.hidden{display:none}
-.modal-content{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;color:var(--text)}
-.modal-content h2{margin-top:0;font-size:18px}
-.close-btn{position:absolute;right:16px;top:16px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 50%,transparent);color:var(--text);font:inherit;font-size:14px;outline:none}
-.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
 </style>
 </head>
-<body data-bg="dots">
-
-<div class="fx" id="fx" aria-hidden="true"></div>
-
-<!-- แถบด้านบน -->
-<div class="bar">
-  <b><i class="fa-solid fa-address-card" style="color:var(--accent)"></i> Matee Thongmala</b>
-  <div class="pick">
-    <button class="theme" id="theme" type="button"><i class="fa-solid fa-circle-half-stroke"></i> สลับโหมด</button>
-    <button class="btn-add" onclick="openModal()"><i class="fa-solid fa-plus"></i> สร้างโพสต์</button>
-  </div>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="orb o3" style="--d:-14"></div>
+  <div class="orb o2" style="--d:-22"></div>
+  <div class="orb o1" style="--d:-30"></div>
+  <div class="beam" style="--d:-10;--r:16deg;left:18%"></div>
+  <div class="beam" style="--d:-18;--r:-14deg;right:12%;opacity:.4"></div>
+  <div class="glow"></div>
+  <div class="floor"></div>
+  <div class="shape ring" style="--d:-20;--t:11s;left:8%;top:62%;width:220px;height:220px"></div>
+  <div class="shape" style="--d:-40;--r:18deg;--t:9s;right:10%;top:16%;width:110px;height:110px;border-radius:22px"></div>
+  <div class="shape" style="--d:-55;--r:45deg;--t:7s;left:18%;top:20%;width:54px;height:54px;border-radius:10px;backdrop-filter:blur(3px)"></div>
+  <div class="shape ring" style="--d:-80;--t:8s;right:22%;top:66%;width:70px;height:70px;filter:blur(1.5px)"></div>
+  <div class="orb o4" style="--d:-60"></div>
+  <div class="vig"></div>
 </div>
+<div class="wrap">
+  <header class="hero">
+    <div class="stage"><div class="photo" id="photo" role="img" aria-label="รูปโปรไฟล์">MT</div></div>
+    <div class="who">
+    <h1>เมธี ทองมาลา</h1>
+    <p class="en">Matee Thongmala</p>
+    <p>ผลงานรวมไว้ที่เดียว เลือกดูตามหมวด หรือเลื่อนลงดูทั้งหมดได้เลย</p>
+    </div>
+  </header>
 
-<main>
-  <!-- แถบแท็บหมวดหมู่แบบยุบรวมและกางออกเมื่อเอาเมาส์ชี้ -->
-  <div class="tabs-container">
-    <nav class="tabs" id="tabs" aria-label="กรองโพสต์">
-      <span class="pill" id="pill"></span>
-      <button type="button" class="on" onclick="filterCategory('all', this)">ทั้งหมด</button>
-      <button type="button" onclick="filterCategory('project', this)">เว็บไซต์</button>
-      <button type="button" onclick="filterCategory('image', this)">รูปภาพ</button>
-      <button type="button" onclick="filterCategory('file', this)">เอกสาร</button>
-      <button type="button" onclick="filterCategory('note', this)">โน๊ต</button>
-    </nav>
-  </div>
+  <section aria-labelledby="a">
+    <h2 id="a">ข้อมูลเบื้องต้น</h2>
+    <div class="about">
+      <div><b>การศึกษา</b><span>วิทยาลัยอาชีวศึกษาสุราษฎร์ธานี สาขาเทคโนโลยีสารสนเทศ (ปวช.3)</span></div>
+      <div><b>ความสนใจ</b><span>เว็บ การออกแบบ งานสร้างสรรค์</span></div>
+      <div><b>ทักษะ</b><span>HTML, CSS, JavaScript, Figma, ตัดต่อ, ออกแบบ</span></div>
+    </div>
+  </section>
 
-  <!-- ค้นหา -->
-  <input type="text" id="search-input" class="search-box" oninput="renderItems()" placeholder="ค้นหาชื่อโพสต์ เนื้อหา หรือแท็ก...">
+  <section aria-labelledby="w">
+    <h2 id="w">ผลงาน</h2>
+    <div class="filter" id="filter" role="group" aria-label="เลือกหมวดผลงาน">
+      <button type="button" data-t="all" aria-pressed="true">ทั้งหมด</button>
+      <button type="button" data-t="web" aria-pressed="false">เว็บไซต์</button>
+      <button type="button" data-t="image" aria-pressed="false">รูปภาพ</button>
+      <button type="button" data-t="doc" aria-pressed="false">เอกสาร</button>
+      <button type="button" data-t="note" aria-pressed="false">โน้ต</button>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
 
-  <!-- โพสต์ฟีด (2 คอลัมน์) -->
-  <div id="item-grid" class="feed-grid"></div>
-
-  <!-- กรณีไม่มีข้อมูล -->
-  <div id="empty-state" style="display:none; text-align:center; padding:40px; color:var(--muted)">
-    <i class="fa-solid fa-folder-open" style="font-size:40px; margin-bottom:10px"></i>
-    <p>ยังไม่มีข้อมูลในหมวดนี้ คลิกปุ่ม "สร้างโพสต์" เพื่อเริ่มเพิ่มข้อมูลได้เลย</p>
-  </div>
-</main>
-
-<!-- Modal ฟอร์มเพิ่ม/แก้ไขโพสต์ -->
-<div id="modal" class="modal-bg hidden">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">&times;</button>
-    <h2 id="modal-title">สร้างโพสต์ใหม่</h2>
-    <form id="asset-form" onsubmit="saveItem(event)">
-      <input type="hidden" id="item-id">
-      <input type="hidden" id="item-file-data">
-      <input type="hidden" id="item-file-name">
-
-      <div class="form-group">
-        <label>หมวดหมู่</label>
-        <select id="item-category" required>
-          <option value="image">รูปภาพ / ฟีดโซเชียล</option>
-          <option value="project">เว็บไซต์ / ระบบ (Project)</option>
-          <option value="file">ไฟล์ / เอกสาร (PDF, DOC)</option>
-          <option value="note">บันทึก / ข้อความ (Note)</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>หัวข้อโพสต์</label>
-        <input type="text" id="item-title" required placeholder="เช่น iPhone 18 Pro Max มาแล้ว!">
-      </div>
-
-      <div class="form-group">
-        <label>แคปชัน / รายละเอียด</label>
-        <textarea id="item-desc" rows="3" placeholder="เขียนข้อความประกอบโพสต์..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>อัปโหลดรูปภาพ (เลือกหลายรูปได้ ระบบย่อขนาดอัตโนมัติ)</label>
-        <input type="file" id="item-images-input" onchange="handleMultipleImages(event)" accept="image/*" multiple>
-        <small id="image-status" style="color:var(--accent)"></small>
-      </div>
-
-      <div class="form-group">
-        <label>แนบไฟล์เอกสาร (ถ้ามี)</label>
-        <input type="file" id="item-file-input" onchange="handleFileUpload(event)" accept=".pdf,.doc,.docx">
-        <small id="file-status" style="color:var(--accent)"></small>
-      </div>
-
-      <div class="form-group">
-        <label>ลิงก์ภายนอก / URL</label>
-        <input type="url" id="item-url" placeholder="https://...">
-      </div>
-
-      <div class="form-group">
-        <label>แท็ก (คั่นด้วยจุลภาค ,)</label>
-        <input type="text" id="item-tags" placeholder="รีวิว, มือถือ">
-      </div>
-
-      <div class="form-actions">
-        <button type="button" class="theme" onclick="closeModal()">ยกเลิก</button>
-        <button type="submit" class="btn-add">บันทึกโพสต์</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal ดูรูปภาพขนาดใหญ่ (Lightbox) -->
-<div id="lightbox-modal" class="modal-bg hidden" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" style="max-width:90vw; max-height:85vh; border-radius:12px; object-fit:contain">
+  <footer>
+    <span>ข้อมูลในหน้านี้เป็นตัวอย่าง แก้เป็นผลงานจริงของคุณ</span>
+    <button class="print" type="button" onclick="window.print()">พิมพ์ / บันทึกเป็น PDF</button>
+  </footer>
 </div>
 
 <script>
-document.getElementById('theme').addEventListener('click',function(){
-  var r=document.documentElement,dark=getComputedStyle(r).colorScheme==='dark';
-  r.setAttribute('data-theme',dark?'light':'dark');
-});
-
-var P={
- code:'<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
- image:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
- file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>',
- note:'<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/>',
- hash:'<line x1="5" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="19" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>',
- spark:'<path d="M12 3l2.2 6.3L21 12l-6.8 2.7L12 21l-2.2-6.3L3 12l6.8-2.7z"/>'
-};
-var S=[['code',7,14,64,46],['image',84,10,52,34],['file',90,52,70,52],['note',5,58,56,30],['hash',22,82,48,22],
- ['spark',72,80,60,40],['code',44,6,34,12],['spark',34,38,28,14],['image',60,92,36,16],['hash',96,86,30,10],['note',14,34,30,12],['file',56,30,26,10]];
-
-var fx=document.getElementById('fx'),itemsFX=[];
-S.forEach(function(s){
- var d=document.createElement('div');d.className='ic';
- d.setAttribute('data-far',s[4]<20?'1':'0');
- d.style.cssText='left:'+s[1]+'%;top:'+s[2]+'%;width:'+s[3]+'px;height:'+s[3]+'px';
- d.innerHTML='<svg viewBox="0 0 24 24">'+P[s[0]]+'</svg>';
- fx.appendChild(d);itemsFX.push({el:d,depth:s[4],x:0,y:0});
-});
-var tx=0,ty=0,sx=0,sy=0,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(!reduce){
- window.addEventListener('pointermove',function(e){
-  tx=(e.clientX/window.innerWidth-.5)*2;
-  ty=(e.clientY/window.innerHeight-.5)*2;
- });
- (function loop(){
-  sx+=(tx-sx)*.05;sy+=(ty-sy)*.05;
-  var rs=document.documentElement.style;
-  rs.setProperty('--mx',sx.toFixed(3));rs.setProperty('--my',sy.toFixed(3));
-  itemsFX.forEach(function(it){
-   var gx=tx*it.depth,gy=ty*it.depth;
-   it.x+=(gx-it.x)*.07;it.y+=(gy-it.y)*.07;
-   it.el.style.transform='translate3d('+it.x.toFixed(2)+'px,'+it.y.toFixed(2)+'px,0) rotate('+(it.x*.25).toFixed(2)+'deg)';
-  });
-  requestAnimationFrame(loop);
- })();
-}
-
-var tabsEl=document.getElementById('tabs'),pill=document.getElementById('pill'),tabBtns=tabsEl.querySelectorAll('button'),sel=tabBtns[0];
-function moveTo(btn){
- pill.style.width=btn.offsetWidth+'px';
- pill.style.transform='translateX('+btn.offsetLeft+'px)';
- tabBtns.forEach(function(t){t.classList.toggle('on',t===btn)});
-}
-function initPill(){pill.style.transition='none';moveTo(sel);pill.offsetWidth;pill.style.transition='';}
-tabBtns.forEach(function(t){
- t.addEventListener('mouseenter',function(){moveTo(t)});
- t.addEventListener('focus',function(){moveTo(t)});
-});
-tabsEl.addEventListener('mouseleave',function(){moveTo(sel)});
-tabsEl.addEventListener('focusout',function(){moveTo(sel)});
-window.addEventListener('resize',initPill);
-initPill();
-
-const defaultItems = [
-  {
-    id: '1',
-    category: 'image',
-    title: 'iPhone 18 Pro Max มาเติมความพรีเมียมให้ทุกวันของคุณ',
-    desc: '📱 ✨ ตัวท็อปที่ใคร ๆ ก็อยากครอบครอง! สัมผัสความหรูหราและเทคโนโลยีล้ำสมัยที่ดีที่สุด',
-    url: '',
-    images: [],
-    fileData: '',
-    fileName: '',
-    tags: 'รีวิว, มือถือ',
-    date: '28 ต.ค. 2026'
-  }
+var LABEL={web:'เว็บไซต์',image:'รูปภาพ',doc:'เอกสาร',note:'โน้ต'};
+var POSTS=[
+ {t:'web',title:'ระบบจองห้องประชุม',desc:'เว็บจองห้องสำหรับทีม 30 คน เห็นตารางว่างแบบเรียลไทม์',date:'28 ต.ค. 2026',url:'#'},
+ {t:'image',title:'ชุดภาพรีวิว iPhone',desc:'ภาพโปรโมตสำหรับโพสต์โซเชียล ชุด 6 ภาพ',date:'20 ต.ค. 2026'},
+ {t:'web',title:'แดชบอร์ดยอดขาย',desc:'กราฟยอดขายรายเดือน กรองตามสาขาได้',date:'12 ต.ค. 2026',url:'#'},
+ {t:'doc',title:'คู่มือการใช้งานระบบ',desc:'คู่มือ 24 หน้า พร้อมภาพประกอบทุกขั้นตอน',date:'2 ต.ค. 2026',url:'#'},
+ {t:'note',title:'เทคนิคทำเว็บให้รองรับมือถือ',desc:'สรุปสั้นๆ เรื่อง grid และ clamp() ที่ใช้บ่อย',date:'25 ก.ย. 2026'}
 ];
-
-let items = JSON.parse(localStorage.getItem('my_assets')) || defaultItems;
-let currentImages = [];
-let currentCategory = 'all';
-
-document.addEventListener('DOMContentLoaded', () => {
-    renderItems();
+var cur='all';
+function draw(){
+ var l=POSTS.filter(function(p){return cur==='all'||p.t===cur});
+ document.getElementById('list').innerHTML=l.length?l.map(function(p){
+  return '<article class="work" style="--c:'+IC[p.t][0]+'"><div class="thumb">ใส่ภาพผลงานตรงนี้</div><div class="body"><div class="meta"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true">'+IC[p.t][1]+'</svg>'+LABEL[p.t]+' · '+p.date+'</div><h3>'+p.title+'</h3><p>'+p.desc+'</p>'+(p.url?'<a href="'+p.url+'">ดูผลงาน</a>':'')+'</div></article>';
+ }).join(''):'<p class="empty">ยังไม่มีผลงานในหมวดนี้</p>';
+}
+var IC={all:['#22b8d6','<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>'],web:['#818cf8','<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'],image:['#f472b6','<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>'],doc:['#fbbf24','<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>'],note:['#34d399','<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/>']};
+document.querySelectorAll('#filter button').forEach(function(b){var m=IC[b.dataset.t];b.style.setProperty('--c',m[0]);b.insertAdjacentHTML('afterbegin','<svg viewBox="0 0 24 24" aria-hidden="true">'+m[1]+'</svg>')});
+document.getElementById('filter').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ cur=b.dataset.t;
+ this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+ draw();
 });
-
-function filterCategory(cat, btn) {
-    currentCategory = cat;
-    sel = btn;
-    moveTo(btn);
-    renderItems();
-}
-
-function handleMultipleImages(e) {
-    const files = Array.from(e.target.files);
-    if (files.length === 0) return;
-    currentImages = [];
-    let loadedCount = 0;
-    
-    files.forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                let width = img.width;
-                let height = img.height;
-                const maxWidth = 1200;
-                const maxHeight = 1200;
-                
-                if (width > height) {
-                    if (width > maxWidth) {
-                        height *= maxWidth / width;
-                        width = maxWidth;
-                    }
-                } else {
-                    if (height > maxHeight) {
-                        width *= maxHeight / height;
-                        height = maxHeight;
-                    }
-                }
-                
-                canvas.width = width;
-                canvas.height = height;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, width, height);
-                
-                const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
-                currentImages.push(compressedDataUrl);
-                loadedCount++;
-                document.getElementById('image-status').innerText = `✓ ย่อและเลือกรูปแล้ว ${loadedCount}/${files.length} รูป`;
-            };
-            img.src = evt.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function handleFileUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(evt) {
-        document.getElementById('item-file-data').value = evt.target.result;
-        document.getElementById('item-file-name').value = file.name;
-        document.getElementById('file-status').innerText = `✓ แนบไฟล์: ${file.name}`;
-    };
-    reader.readAsDataURL(file);
-}
-
-function openLightbox(imgSrc) {
-    const modal = document.getElementById('lightbox-modal');
-    document.getElementById('lightbox-img').src = imgSrc;
-    modal.classList.remove('hidden');
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox-modal').classList.add('hidden');
-}
-
-function renderItems() {
-    const grid = document.getElementById('item-grid');
-    const emptyState = document.getElementById('empty-state');
-    const searchText = document.getElementById('search-input').value.toLowerCase();
-
-    const filtered = items.filter(item => {
-        const matchCat = (currentCategory === 'all' || item.category === currentCategory);
-        const matchSearch = item.title.toLowerCase().includes(searchText) || 
-                            item.desc.toLowerCase().includes(searchText) || 
-                            (item.tags && item.tags.toLowerCase().includes(searchText));
-        return matchCat && matchSearch;
-    });
-
-    if (filtered.length === 0) {
-        grid.innerHTML = '';
-        emptyState.style.display = 'block';
-        return;
-    }
-
-    emptyState.style.display = 'none';
-    grid.innerHTML = filtered.map(item => {
-        const tagsList = item.tags ? item.tags.split(',').map(t => `<span class="tag">#${t.trim()}</span>`).join(' ') : '';
-        const targetLink = item.fileData || item.url;
-
-        let imageGridHTML = '';
-        if (item.images && item.images.length > 0) {
-            const count = item.images.length;
-            const cClass = count >= 4 ? 'c4' : `c${count}`;
-            
-            let boxes = '';
-            const showImgs = item.images.slice(0, 4);
-            showImgs.forEach((img, idx) => {
-                const isLast = (idx === 3 && count > 4);
-                boxes += `
-                  <div class="img-box" onclick="openLightbox('${img}')">
-                    <img src="${img}">
-                    ${isLast ? `<div class="more-overlay">+${count - 3}</div>` : ''}
-                  </div>
-                `;
-            });
-            imageGridHTML = `<div class="img-grid ${cClass}">${boxes}</div>`;
-        }
-
-        return `
-            <article class="card">
-                <div class="card-header">
-                    <div class="who">
-                        <div class="av">MT</div>
-                        <div>
-                            <b>Matee Thongmala</b>
-                            <small>${item.date} • <i class="fa-solid fa-globe"></i></small>
-                        </div>
-                    </div>
-                    <div class="actions">
-                        <button onclick="editItem('${item.id}')" title="แก้ไข"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button onclick="deleteItem('${item.id}')" title="ลบ"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3>${item.title}</h3>
-                    <p>${item.desc || ''}</p>
-                    <div class="tag-list">${tagsList}</div>
-                    ${imageGridHTML}
-                </div>
-                ${targetLink ? `
-                    <div class="card-footer">
-                        <a href="${targetLink}" target="_blank">
-                            <i class="fa-solid fa-paperclip"></i> เปิดไฟล์แนบ / ลิงก์ภายนอก
-                        </a>
-                    </div>
-                ` : ''}
-            </article>
-        `;
-    }).join('');
-}
-
-function openModal() {
-    document.getElementById('asset-form').reset();
-    document.getElementById('item-id').value = '';
-    document.getElementById('item-file-data').value = '';
-    document.getElementById('item-file-name').value = '';
-    document.getElementById('image-status').innerText = '';
-    document.getElementById('file-status').innerText = '';
-    currentImages = [];
-    document.getElementById('modal-title').innerText = 'สร้างโพสต์ใหม่';
-    document.getElementById('modal').classList.remove('hidden');
-}
-
-function closeModal() {
-    document.getElementById('modal').classList.add('hidden');
-}
-
-function saveItem(e) {
-    e.preventDefault();
-    const id = document.getElementById('item-id').value;
-    const category = document.getElementById('item-category').value;
-    const title = document.getElementById('item-title').value;
-    const desc = document.getElementById('item-desc').value;
-    const url = document.getElementById('item-url').value;
-    const fileData = document.getElementById('item-file-data').value;
-    const fileName = document.getElementById('item-file-name').value;
-    const tags = document.getElementById('item-tags').value;
-    const date = 'วันนี้';
-
-    if (id) {
-        const index = items.findIndex(item => item.id === id);
-        if (index !== -1) {
-            items[index] = { 
-                ...items[index], 
-                category, title, desc, url, tags,
-                images: currentImages.length > 0 ? currentImages : items[index].images,
-                fileData: fileData || items[index].fileData,
-                fileName: fileName || items[index].fileName
-            };
-        }
-    } else {
-        const newItem = {
-            id: Date.now().toString(),
-            category, title, desc, url, images: currentImages, fileData, fileName, tags, date
-        };
-        items.unshift(newItem);
-    }
-
-    try {
-        localStorage.setItem('my_assets', JSON.stringify(items));
-    } catch (err) {
-        alert('พื้นที่จัดเก็บเต็ม กรุณาลดจำนวนรูปหรือเลือกรูปที่มีขนาดเล็กลง');
-        return;
-    }
-
-    closeModal();
-    renderItems();
-}
-
-function editItem(id) {
-    const item = items.find(i => i.id === id);
-    if (!item) return;
-
-    document.getElementById('item-id').value = item.id;
-    document.getElementById('item-category').value = item.category;
-    document.getElementById('item-title').value = item.title;
-    document.getElementById('item-desc').value = item.desc;
-    document.getElementById('item-url').value = item.url || '';
-    document.getElementById('item-file-data').value = item.fileData || '';
-    document.getElementById('item-file-name').value = item.fileName || '';
-    currentImages = item.images || [];
-    document.getElementById('image-status').innerText = currentImages.length > 0 ? `รูปภาพเดิม: ${currentImages.length} รูป` : '';
-    document.getElementById('item-tags').value = item.tags || '';
-    document.getElementById('modal-title').innerText = 'แก้ไขโพสต์';
-
-    document.getElementById('modal').classList.remove('hidden');
-}
-
-function deleteItem(id) {
-    if (confirm('คุณต้องการลบโพสต์นี้ใช่หรือไม่?')) {
-        items = items.filter(i => i.id !== id);
-        localStorage.setItem('my_assets', JSON.stringify(items));
-        renderItems();
-    }
+draw();
+(function(){var bg=document.querySelector('.bg'),v=bg.querySelector('.vig');for(var i=0;i<46;i++){var d=document.createElement('div'),dp=Math.round(8+Math.random()*80),s=1+dp/28;d.className='dot';d.style.cssText='--d:-'+dp+';left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;width:'+s.toFixed(1)+'px;height:'+s.toFixed(1)+'px;opacity:'+(.25+dp/130).toFixed(2)+(dp>60?';filter:blur(1px)':'');bg.insertBefore(d,v)}})();
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+ var tx=0,ty=0,sx=0,sy=0,rs=document.documentElement.style;
+ addEventListener('pointermove',function(e){tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2});
+ (function f(){sx+=(tx-sx)*.05;sy+=(ty-sy)*.05;rs.setProperty('--mx',sx.toFixed(3));rs.setProperty('--my',sy.toFixed(3));requestAnimationFrame(f)})();
 }
 </script>
 </body>
