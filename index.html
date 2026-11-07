@@ -93,17 +93,17 @@ main{max-width:1100px;margin:24px auto 60px;padding:0 16px;display:grid;gap:20px
 .tag-list{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
 .tag{color:var(--accent);font-size:13px}
 
-/* รูปภาพในโพสต์แบบ Social Grid (ขยายขนาดให้ใหญ่และชัดขึ้น) */
-.img-grid{margin-top:12px;background:rgba(0,0,0,.2);display:grid;gap:3px;overflow:hidden;border-radius:14px}
-.img-grid.c1{grid-template-columns:1fr;max-height:450px}
-.img-grid.c2{grid-template-columns:1fr 1fr;height:320px}
-.img-grid.c3{grid-template-columns:1fr 1fr;height:360px}
+/* รูปภาพในโพสต์แบบ Social Grid (ขนาดใหญ่เต็มตา) */
+.img-grid{margin-top:12px;background:rgba(0,0,0,.2);display:grid;gap:4px;overflow:hidden;border-radius:14px}
+.img-grid.c1{grid-template-columns:1fr;max-height:500px}
+.img-grid.c2{grid-template-columns:1fr 1fr;height:400px}
+.img-grid.c3{grid-template-columns:1fr 1fr;height:440px}
 .img-grid.c3 .img-box:first-child{grid-row:span 2}
-.img-grid.c4{grid-template-columns:1fr 1fr;height:360px}
+.img-grid.c4{grid-template-columns:1fr 1fr;height:440px}
 .img-box{position:relative;overflow:hidden;cursor:pointer;height:100%}
 .img-box img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
 .img-box:hover img{transform:scale(1.03)}
-.more-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;font-size:24px;font-weight:700}
+.more-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700}
 
 .card-footer{padding:12px 20px;border-top:1px solid var(--line);background:rgba(0,0,0,.1);font-size:13px}
 .card-footer a{color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
@@ -189,7 +189,7 @@ main{max-width:1100px;margin:24px auto 60px;padding:0 16px;display:grid;gap:20px
       </div>
 
       <div class="form-group">
-        <label>อัปโหลดรูปภาพ (เลือกหลายรูปได้)</label>
+        <label>อัปโหลดรูปภาพ (เลือกหลายรูปได้ ระบบย่อขนาดอัตโนมัติ)</label>
         <input type="file" id="item-images-input" onchange="handleMultipleImages(event)" accept="image/*" multiple>
         <small id="image-status" style="color:var(--accent)"></small>
       </div>
@@ -224,7 +224,6 @@ main{max-width:1100px;margin:24px auto 60px;padding:0 16px;display:grid;gap:20px
 </div>
 
 <script>
-/* ===== 1. ระบบควบคุม Theme และไอคอนลอย Parallax ===== */
 document.getElementById('theme').addEventListener('click',function(){
   var r=document.documentElement,dark=getComputedStyle(r).colorScheme==='dark';
   r.setAttribute('data-theme',dark?'light':'dark');
@@ -268,7 +267,6 @@ if(!reduce){
  })();
 }
 
-/* แถบไฮไลต์ไหลตามแท็บ */
 var tabsEl=document.getElementById('tabs'),pill=document.getElementById('pill'),tabBtns=tabsEl.querySelectorAll('button'),sel=tabBtns[0];
 function moveTo(btn){
  pill.style.width=btn.offsetWidth+'px';
@@ -285,7 +283,6 @@ tabsEl.addEventListener('focusout',function(){moveTo(sel)});
 window.addEventListener('resize',initPill);
 initPill();
 
-/* ===== 2. ระบบจัดการข้อมูลโพสต์ และ Render โพสต์ ===== */
 const defaultItems = [
   {
     id: '1',
@@ -316,21 +313,48 @@ function filterCategory(cat, btn) {
     renderItems();
 }
 
+// ฟังก์ชันย่อขนาดภาพอัตโนมัติ ป้องกันความจำเครื่องเต็ม
 function handleMultipleImages(e) {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
     currentImages = [];
     let loadedCount = 0;
+    
     files.forEach((file) => {
-        if (file.size > 4 * 1024 * 1024) {
-            alert(`ไฟล์ ${file.name} มีขนาดใหญ่เกิน 4MB`);
-            return;
-        }
         const reader = new FileReader();
         reader.onload = function(evt) {
-            currentImages.push(evt.target.result);
-            loadedCount++;
-            document.getElementById('image-status').innerText = `✓ เลือกรูปภาพแล้ว ${loadedCount} รูป`;
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                const maxWidth = 1200;
+                const maxHeight = 1200;
+                
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                    }
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                // บีบอัดไฟล์ภาพให้มีขนาดพอดีและบันทึกได้
+                const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                currentImages.push(compressedDataUrl);
+                loadedCount++;
+                document.getElementById('image-status').innerText = `✓ ย่อและเลือกรูปแล้ว ${loadedCount}/${files.length} รูป`;
+            };
+            img.src = evt.target.result;
         };
         reader.readAsDataURL(file);
     });
@@ -475,49 +499,3 @@ function saveItem(e) {
         }
     } else {
         const newItem = {
-            id: Date.now().toString(),
-            category, title, desc, url, images: currentImages, fileData, fileName, tags, date
-        };
-        items.unshift(newItem);
-    }
-
-    try {
-        localStorage.setItem('my_assets', JSON.stringify(items));
-    } catch (err) {
-        alert('ขนาดไฟล์ใหญ่เกินความจุเบราว์เซอร์ กรุณาลดขนาดรูปลง');
-        return;
-    }
-
-    closeModal();
-    renderItems();
-}
-
-function editItem(id) {
-    const item = items.find(i => i.id === id);
-    if (!item) return;
-
-    document.getElementById('item-id').value = item.id;
-    document.getElementById('item-category').value = item.category;
-    document.getElementById('item-title').value = item.title;
-    document.getElementById('item-desc').value = item.desc;
-    document.getElementById('item-url').value = item.url || '';
-    document.getElementById('item-file-data').value = item.fileData || '';
-    document.getElementById('item-file-name').value = item.fileName || '';
-    currentImages = item.images || [];
-    document.getElementById('image-status').innerText = currentImages.length > 0 ? `รูปภาพเดิม: ${currentImages.length} รูป` : '';
-    document.getElementById('item-tags').value = item.tags || '';
-    document.getElementById('modal-title').innerText = 'แก้ไขโพสต์';
-
-    document.getElementById('modal').classList.remove('hidden');
-}
-
-function deleteItem(id) {
-    if (confirm('คุณต้องการลบโพสต์นี้ใช่หรือไม่?')) {
-        items = items.filter(i => i.id !== id);
-        localStorage.setItem('my_assets', JSON.stringify(items));
-        renderItems();
-    }
-}
-</script>
-</body>
-</html>
