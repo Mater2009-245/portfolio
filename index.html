@@ -499,3 +499,49 @@ function saveItem(e) {
         }
     } else {
         const newItem = {
+            id: Date.now().toString(),
+            category, title, desc, url, images: currentImages, fileData, fileName, tags, date
+        };
+        items.unshift(newItem);
+    }
+
+    try {
+        localStorage.setItem('my_assets', JSON.stringify(items));
+    } catch (err) {
+        alert('พื้นที่จัดเก็บเต็ม กรุณาลดจำนวนรูปหรือเลือกรูปที่มีขนาดเล็กลง');
+        return;
+    }
+
+    closeModal();
+    renderItems();
+}
+
+function editItem(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+
+    document.getElementById('item-id').value = item.id;
+    document.getElementById('item-category').value = item.category;
+    document.getElementById('item-title').value = item.title;
+    document.getElementById('item-desc').value = item.desc;
+    document.getElementById('item-url').value = item.url || '';
+    document.getElementById('item-file-data').value = item.fileData || '';
+    document.getElementById('item-file-name').value = item.fileName || '';
+    currentImages = item.images || [];
+    document.getElementById('image-status').innerText = currentImages.length > 0 ? `รูปภาพเดิม: ${currentImages.length} รูป` : '';
+    document.getElementById('item-tags').value = item.tags || '';
+    document.getElementById('modal-title').innerText = 'แก้ไขโพสต์';
+
+    document.getElementById('modal').classList.remove('hidden');
+}
+
+function deleteItem(id) {
+    if (confirm('คุณต้องการลบโพสต์นี้ใช่หรือไม่?')) {
+        items = items.filter(i => i.id !== id);
+        localStorage.setItem('my_assets', JSON.stringify(items));
+        renderItems();
+    }
+}
+</script>
+</body>
+</html>
