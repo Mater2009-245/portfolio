@@ -34,7 +34,7 @@
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur">
-        <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-cyan-500/10 text-cyan-500 rounded-lg">
                     <i class="fa-solid fa-address-card text-xl"></i>
@@ -59,7 +59,7 @@
     </header>
 
     <!-- Main Feed Layout -->
-    <main class="max-w-xl mx-auto px-2 sm:px-4 py-6">
+    <main class="max-w-6xl mx-auto px-4 py-6">
         
         <!-- Filter Tabs & Search -->
         <div class="bg-white dark:bg-gray-900 p-3 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 mb-6 space-y-3">
@@ -77,8 +77,8 @@
             </div>
         </div>
 
-        <!-- Feed Posts Container -->
-        <div id="item-grid" class="space-y-6">
+        <!-- Feed Posts Container (Grid 2 Columns) -->
+        <div id="item-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <!-- Dynamic Social Feed Cards Here -->
         </div>
 
@@ -258,7 +258,6 @@
             }
         }
 
-        // Lightbox Functions
         function openLightbox(imgSrc) {
             const modal = document.getElementById('lightbox-modal');
             const img = document.getElementById('lightbox-img');
@@ -294,18 +293,17 @@
                 const tagsList = item.tags ? item.tags.split(',').map(t => `<span class="text-xs text-cyan-600 dark:text-cyan-400 mr-1">#${t.trim()}</span>`).join(' ') : '';
                 const targetLink = item.fileData || item.url;
 
-                // Facebook-like Image Grid Layout with Click to Lightbox
                 let imageGridHTML = '';
                 if (item.images && item.images.length > 0) {
                     const count = item.images.length;
                     if (count === 1) {
-                        imageGridHTML = `<div class="w-full max-h-[400px] overflow-hidden bg-black/5 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div>`;
+                        imageGridHTML = `<div class="w-full max-h-[350px] overflow-hidden bg-black/5 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div>`;
                     } else if (count === 2) {
-                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-64"><div class="overflow-hidden cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div></div>`;
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-56"><div class="overflow-hidden cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div></div>`;
                     } else if (count === 3) {
-                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden row-span-2 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[2]}')"><img src="${item.images[2]}" class="w-full h-full object-cover hover:opacity-95 transition"></div></div>`;
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-64"><div class="overflow-hidden row-span-2 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-32 cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-32 cursor-pointer" onclick="openLightbox('${item.images[2]}')"><img src="${item.images[2]}" class="w-full h-full object-cover hover:opacity-95 transition"></div></div>`;
                     } else {
-                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-72"><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 cursor-pointer" onclick="openLightbox('${item.images[2]}')"><img src="${item.images[2]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-36 relative cursor-pointer" onclick="openLightbox('${item.images[3]}')"><img src="${item.images[3]}" class="w-full h-full object-cover hover:opacity-95 transition">${count > 4 ? `<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-lg">+${count - 3}</div>` : ''}</div></div>`;
+                        imageGridHTML = `<div class="grid grid-cols-2 gap-0.5 bg-white dark:bg-gray-900 h-64"><div class="overflow-hidden h-32 cursor-pointer" onclick="openLightbox('${item.images[0]}')"><img src="${item.images[0]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-32 cursor-pointer" onclick="openLightbox('${item.images[1]}')"><img src="${item.images[1]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-32 cursor-pointer" onclick="openLightbox('${item.images[2]}')"><img src="${item.images[2]}" class="w-full h-full object-cover hover:opacity-95 transition"></div><div class="overflow-hidden h-32 relative cursor-pointer" onclick="openLightbox('${item.images[3]}')"><img src="${item.images[3]}" class="w-full h-full object-cover hover:opacity-95 transition">${count > 4 ? `<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-lg">+${count - 3}</div>` : ''}</div></div>`;
                     }
                 }
 
