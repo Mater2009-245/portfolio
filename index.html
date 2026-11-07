@@ -109,6 +109,18 @@ html.formal h2{border-bottom:2px solid var(--accent);padding-bottom:6px}
 .gt button{flex:none;width:52px;height:72px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;cursor:pointer;opacity:.7}
 .gt button.on{border-color:var(--c);opacity:1}
 .gt img{width:100%;height:100%;object-fit:cover;display:block}
+#admin{margin-top:40px;padding:18px 20px;border:1px dashed var(--accent);border-radius:16px;background:var(--card)}
+#admin[hidden]{display:none}
+#admin h2{margin-top:0}
+#admin form{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+#admin label{display:flex;flex-direction:column;gap:2px;font-size:14px;color:var(--muted)}
+#admin .full{grid-column:1/-1}
+#admin input,#admin select,#admin textarea{font:inherit;font-size:15px;padding:8px 12px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text)}
+#admin select option{color:#000}
+#admin .ab{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+#admin pre{margin:10px 0;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--accent) 8%,transparent);white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.6}
+#admin ol{margin:8px 0 0;padding-left:22px;color:var(--muted)}
+@media print{#admin{display:none}}
 </style>
 </head>
 <body>
@@ -169,6 +181,32 @@ html.formal h2{border-bottom:2px solid var(--accent);padding-bottom:6px}
     </div>
   </section>
 
+  <section id="admin" aria-labelledby="ah" hidden>
+    <h2 id="ah">เพิ่มผลงาน (สร้างโค้ด)</h2>
+    <form id="af">
+      <label>หมวด<select name="t"><option value="web">เว็บไซต์</option><option value="image">รูปภาพ</option><option value="doc">เอกสาร</option><option value="note">โน้ต</option></select></label>
+      <label>ชื่อผลงาน<input name="title" required></label>
+      <label class="full">คำอธิบายสั้น<input name="desc" required></label>
+      <label>วันที่<input name="date"></label>
+      <label>ลิงก์ผลงาน (ไม่ใส่ก็ได้)<input name="url" placeholder="https://..."></label>
+      <label>บทบาทของคุณ<input name="role"></label>
+      <label>เครื่องมือที่ใช้<input name="tools" placeholder="เช่น Canva, HTML"></label>
+      <label class="full">ชื่อไฟล์ภาพ คั่นด้วยจุลภาค (ไม่ใส่ก็ได้)<input name="imgs" placeholder="images/a.jpg, images/b.jpg"></label>
+      <label class="full">รายละเอียดแบบเต็ม<textarea name="detail" rows="3"></textarea></label>
+      <div class="full"><button class="more" type="submit">สร้างโค้ด</button></div>
+    </form>
+    <div id="ares" hidden>
+      <pre id="aout"></pre>
+      <div class="ab"><button class="more" type="button" id="acp">คัดลอกโค้ด</button><button class="more" type="button" id="apv">ดูตัวอย่างบนหน้านี้</button></div>
+    </div>
+    <ol>
+      <li>กรอกข้อมูล กด “สร้างโค้ด” แล้วกด “คัดลอกโค้ด”</li>
+      <li>ถ้ามีภาพ ให้อัปโหลดไฟล์ภาพเข้า repository ก่อน โดยใช้ชื่อไฟล์เดียวกับที่กรอก</li>
+      <li>เปิดไฟล์ index.html บน GitHub (ไอคอนดินสอ) ค้นหา <code>var POSTS=[</code> แล้ววางโค้ดในบรรทัดใหม่ถัดไป ผลงานจะขึ้นเป็นชิ้นแรก</li>
+      <li>กด Commit changes แล้วรอ 1–2 นาที</li>
+    </ol>
+  </section>
+
   <footer>
     <span>ข้อมูลในหน้านี้เป็นตัวอย่าง แก้เป็นผลงานจริงของคุณ</span>
     <button class="print" type="button" onclick="window.print()">พิมพ์ / บันทึกเป็น PDF</button>
@@ -219,6 +257,28 @@ document.getElementById('list').addEventListener('click',function(e){var b=e.tar
 dlg.addEventListener('click',function(e){if(e.target===dlg||e.target.id==='cl')return dlg.close();var k=e.target.closest('[data-k]');if(k){var g=document.getElementById('gm');g.src=k.firstChild.src;g.alt=k.getAttribute('aria-label');dlg.querySelectorAll('.gt button').forEach(function(b){b.classList.toggle('on',b===k)})}});
 var fm=document.getElementById('fm');
 fm.addEventListener('click',function(){var on=document.documentElement.classList.toggle('formal');fm.setAttribute('aria-pressed',on);fm.textContent=on?'กลับโหมดปกติ':'โหมดทางการ'});
+(function(){
+var ad=document.getElementById('admin'),af=document.getElementById('af'),last=null;
+var M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],d=new Date();
+af.elements['date'].value=d.getDate()+' '+M[d.getMonth()]+' '+d.getFullYear();
+function chk(){var on=location.hash==='#admin';ad.hidden=!on;if(on)ad.scrollIntoView()}
+addEventListener('hashchange',chk);chk();
+function h(v){return v.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function q(v){return "'"+String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\s*\n\s*/g,' ')+"'"}
+function code(o){var r=[];['t','title','desc','date','url','imgs','role','tools','detail'].forEach(function(k){if(o[k]==null)return;r.push(k+':'+(k==='imgs'?'['+o.imgs.map(q).join(',')+']':q(o[k])))});return '{'+r.join(',')+'},'}
+function E(n){return af.elements[n].value.trim()}
+af.addEventListener('submit',function(e){
+ e.preventDefault();
+ var o={t:E('t'),title:h(E('title')),desc:h(E('desc')),date:h(E('date')),role:h(E('role')||'-'),tools:h(E('tools')||'-'),detail:h(E('detail')||E('desc'))};
+ if(E('url'))o.url=E('url').replace(/"/g,'%22');
+ var im=E('imgs').split(',').map(function(x){return x.trim()}).filter(Boolean);if(im.length)o.imgs=im;
+ last=o;document.getElementById('aout').textContent=code(o);document.getElementById('ares').hidden=false;
+});
+var cp=document.getElementById('acp');
+cp.addEventListener('click',function(){var t=document.getElementById('aout').textContent;
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}).then(function(){cp.textContent='คัดลอกแล้ว ✓';setTimeout(function(){cp.textContent='คัดลอกโค้ด'},1800)})});
+document.getElementById('apv').addEventListener('click',function(){if(!last)return;POSTS.unshift(last);document.querySelector('#filter [data-t="all"]').click();document.getElementById('list').scrollIntoView()});
+})();
 </script>
 </body>
 </html>
